@@ -3,10 +3,9 @@ resource "aws_subnet" "private_subnet_1a" {
   cidr_block        = "10.0.0.0/20"
   availability_zone = format("%sa", var.region)
 
-  tags = {
+  tags = merge({
     Name = format("%s-private-subnet-1a", var.project_name)
-  }
-
+  },local.default_tags)
 }
 
 resource "aws_subnet" "private_subnet_1b" {
@@ -14,10 +13,9 @@ resource "aws_subnet" "private_subnet_1b" {
   cidr_block        = "10.0.16.0/20"
   availability_zone = format("%sb", var.region)
 
-  tags = {
+  tags = merge({
     Name = format("%s-private-subnet-1b", var.project_name)
-  }
-
+  },local.default_tags)
 }
 
 resource "aws_subnet" "private_subnet_1c" {
@@ -25,17 +23,17 @@ resource "aws_subnet" "private_subnet_1c" {
   cidr_block        = "10.0.32.0/20"
   availability_zone = format("%sc", var.region)
 
-  tags = {
+  tags = merge({
     Name = format("%s-private-subnet-1c", var.project_name)
-  }
-
+  },local.default_tags)
 }
 
 resource "aws_route_table" "private_internet_access_1a" {
   vpc_id = aws_vpc.main.id
-  tags = {
+
+  tags = merge({
     Name = format("%s-private-1a", var.project_name)
-  }
+  },local.default_tags)
 }
 
 resource "aws_route" "private_access_1a" {
@@ -46,9 +44,10 @@ resource "aws_route" "private_access_1a" {
 
 resource "aws_route_table" "private_internet_access_1b" {
   vpc_id = aws_vpc.main.id
-  tags = {
+
+  tags = merge({
     Name = format("%s-private-1b", var.project_name)
-  }
+  },local.default_tags)
 }
 
 resource "aws_route" "private_access_1b" {
@@ -59,9 +58,10 @@ resource "aws_route" "private_access_1b" {
 
 resource "aws_route_table" "private_internet_access_1c" {
   vpc_id = aws_vpc.main.id
-  tags = {
+
+  tags = merge({
     Name = format("%s-private-1c", var.project_name)
-  }
+  },local.default_tags)
 }
 
 resource "aws_route" "private_access_1c" {
