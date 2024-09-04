@@ -1,0 +1,1 @@
+terraform init -reconfigure -backend-config=environment/dev/backend.tfvars
