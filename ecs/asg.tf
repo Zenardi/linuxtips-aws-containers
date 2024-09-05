@@ -1,5 +1,5 @@
 resource "aws_autoscaling_group" "on_demand" {
-  name = format("$s-on-demand", var.project_name)
+  name = format("%s-on-demand", var.project_name)
 
   vpc_zone_identifier = [
     data.aws_ssm_parameter.subnet_private_1a.value,

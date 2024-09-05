@@ -15,9 +15,10 @@ resource "aws_launch_template" "spots" {
   }
 
   update_default_version = true
-  iam_instance_profile {
-    name = "ecsInstanceRole"
-  }
+  # iam_instance_profile {
+  #   # name = aws_iam_instance_profile.main.name
+  #   name = "ecsInstanceRole"
+  # }
 
   block_device_mappings {
     device_name = "/dev/xvda"
@@ -34,7 +35,7 @@ resource "aws_launch_template" "spots" {
   }
   tags = local.default_tags
 
-  user_data = base64decode(templatefile("${path.module}/templates/user-data.tpl", {
+  user_data = base64encode(templatefile("${path.module}/templates/user-data.tpl", {
     CLUSTER_NAME = var.project_name
   }))
 }
