@@ -36,5 +36,5 @@ resource "aws_ecs_service" "main" {
   #   platform_version = "LATEST"
 
   depends_on = []
-
+  tags       = var.tags
 }

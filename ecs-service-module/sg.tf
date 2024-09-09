@@ -20,4 +20,6 @@ resource "aws_security_group" "main" {
       "0.0.0.0/0"
     ]
   }
+
+  tags = var.tags
 }

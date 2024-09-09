@@ -11,5 +11,5 @@ resource "aws_alb_listener_rule" "main" {
       values = var.service_hosts
     }
   }
-
+  tags = var.tags
 }

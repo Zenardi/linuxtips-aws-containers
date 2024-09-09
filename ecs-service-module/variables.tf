@@ -61,3 +61,7 @@ variable "service_launch_type" {
 variable "service_hosts" {
 
 }
+
+variable "tags" {
+
+}

@@ -15,15 +15,15 @@ resource "aws_ecs_task_definition" "main" {
     {
       name   = var.service_name
       image  = format("%s:latest", aws_ecr_repository.main.repository_url)
-      cpu    = var.service_cpu
-      memory = var.service_memory
+      cpu    = tonumber(var.service_cpu)
+      memory = tonumber(var.service_memory)
 
       essential = true
 
       portMappings = [
         {
-          containerPort = var.service_port
-          hostPort      = var.service_port
+          containerPort = tonumber(var.service_port)
+          hostPort      = tonumber(var.service_port)
           protocol      = "tcp"
         },
       ]
@@ -41,5 +41,5 @@ resource "aws_ecs_task_definition" "main" {
     }
   ])
 
-
+  tags = var.tags
 }
