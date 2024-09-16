@@ -3,7 +3,10 @@ resource "aws_eip" "vpc_eip_1a" {
 
   tags = merge({
     Name = format("%s-eip-1a", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_nat_gateway" "nat_1a" {
@@ -12,7 +15,10 @@ resource "aws_nat_gateway" "nat_1a" {
 
   tags = merge({
     Name = format("%s-nat-1a", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_eip" "vpc_eip_1b" {
@@ -20,7 +26,10 @@ resource "aws_eip" "vpc_eip_1b" {
 
   tags = merge({
     Name = format("%s-eip-1b", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_nat_gateway" "nat_1b" {
@@ -29,7 +38,10 @@ resource "aws_nat_gateway" "nat_1b" {
 
   tags = merge({
     Name = format("%s-nat-1b", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 
@@ -38,7 +50,10 @@ resource "aws_eip" "vpc_eip_1c" {
 
   tags = merge({
     Name = format("%s-eip-1c", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_nat_gateway" "nat_1c" {
@@ -47,5 +62,8 @@ resource "aws_nat_gateway" "nat_1c" {
 
   tags = merge({
     Name = format("%s-nat-1c", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

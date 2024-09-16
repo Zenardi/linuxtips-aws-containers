@@ -19,6 +19,7 @@ resource "aws_alb_target_group" "main" {
 
   lifecycle {
     create_before_destroy = false
+    ignore_changes        = [tags]
   }
   tags = var.tags
 }

@@ -6,6 +6,10 @@ resource "aws_ecs_cluster" "main" {
     value = "enabled"
   }
   tags = local.default_tags
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_ecs_cluster_capacity_providers" "main" {

@@ -5,7 +5,11 @@ resource "aws_subnet" "databases_subnet_1a" {
 
   tags = merge({
     Name = format("%s-databases-subnet-1a", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_subnet" "databases_subnet_1b" {
@@ -15,7 +19,11 @@ resource "aws_subnet" "databases_subnet_1b" {
 
   tags = merge({
     Name = format("%s-databases-subnet-1b", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_subnet" "databases_subnet_1c" {
@@ -25,5 +33,9 @@ resource "aws_subnet" "databases_subnet_1c" {
 
   tags = merge({
     Name = format("%s-databases-subnet-1c", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

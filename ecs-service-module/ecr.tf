@@ -7,4 +7,8 @@ resource "aws_ecr_repository" "main" {
   }
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

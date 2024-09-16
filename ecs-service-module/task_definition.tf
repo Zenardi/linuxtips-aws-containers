@@ -42,4 +42,8 @@ resource "aws_ecs_task_definition" "main" {
   ])
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

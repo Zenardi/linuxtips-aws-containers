@@ -36,6 +36,10 @@ resource "aws_autoscaling_group" "spots" {
     value               = local.expiration_date
     propagate_at_launch = true
   }
+
+  lifecycle {
+    ignore_changes = [tag]
+  }
 }
 
 resource "aws_ecs_capacity_provider" "spots" {
@@ -50,4 +54,7 @@ resource "aws_ecs_capacity_provider" "spots" {
     }
   }
   tags = local.default_tags
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

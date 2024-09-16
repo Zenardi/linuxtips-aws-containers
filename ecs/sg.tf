@@ -13,6 +13,10 @@ resource "aws_security_group" "main" {
     ]
   }
   tags = local.default_tags
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_security_group_rule" "subnet_ranges" {

@@ -36,6 +36,10 @@ resource "aws_autoscaling_group" "on_demand" {
     value               = local.expiration_date
     propagate_at_launch = true
   }
+
+  lifecycle {
+    ignore_changes = [tag]
+  }
 }
 
 resource "aws_ecs_capacity_provider" "on_demand" {
@@ -50,4 +54,8 @@ resource "aws_ecs_capacity_provider" "on_demand" {
     }
   }
   tags = local.default_tags
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

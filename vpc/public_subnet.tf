@@ -5,7 +5,10 @@ resource "aws_subnet" "public_subnet_1a" {
 
   tags = merge({
     Name = format("%s-public-subnet-1a", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 
 }
 
@@ -16,7 +19,10 @@ resource "aws_subnet" "public_subnet_1b" {
 
   tags = merge({
     Name = format("%s-public-subnet-1b", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_subnet" "public_subnet_1c" {
@@ -26,7 +32,10 @@ resource "aws_subnet" "public_subnet_1c" {
 
   tags = merge({
     Name = format("%s-public-subnet-1c", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_route_table" "public_internet_access" {
@@ -34,7 +43,10 @@ resource "aws_route_table" "public_internet_access" {
 
   tags = merge({
     Name = format("%s-public", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
 
 resource "aws_route" "public_access" {

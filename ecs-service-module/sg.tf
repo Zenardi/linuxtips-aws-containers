@@ -22,4 +22,7 @@ resource "aws_security_group" "main" {
   }
 
   tags = var.tags
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

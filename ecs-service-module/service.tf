@@ -29,8 +29,14 @@ resource "aws_ecs_service" "main" {
 
   lifecycle {
     ignore_changes = [
-      desired_count
+      desired_count,
+      tags
     ]
+  }
+
+  ordered_placement_strategy {
+    type  = "spread"
+    field = "attribute:ecs.availability-zone"
   }
 
   #   platform_version = "LATEST"

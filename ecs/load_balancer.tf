@@ -72,4 +72,8 @@ resource "aws_lb_listener" "main" {
     }
   }
   tags = local.default_tags
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

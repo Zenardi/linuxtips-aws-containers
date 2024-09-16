@@ -3,5 +3,8 @@ resource "aws_internet_gateway" "gw" {
 
   tags = merge({
     Name = format("%s-igw", var.project_name)
-  },local.default_tags)
+  }, local.default_tags)
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }

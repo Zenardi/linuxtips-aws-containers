@@ -31,4 +31,8 @@ resource "aws_launch_template" "on_demand" {
   user_data = base64encode(templatefile("${path.module}/templates/user-data.tpl", {
     CLUSTER_NAME = var.project_name
   }))
+
+  lifecycle {
+    ignore_changes = [tags]
+  }
 }
