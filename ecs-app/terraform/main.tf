@@ -44,7 +44,7 @@ module "service" {
   scale_in_cooldown            = var.scale_in_cooldown
   scale_tracking_cpu           = var.scale_tracking_cpu
   scale_tracking_requests      = var.scale_tracking_requests
-  alb_arn                      = var.ssm_alb
+  alb_arn                      = data.aws_ssm_parameter.alb.value
 
   tags = local.default_tags
 

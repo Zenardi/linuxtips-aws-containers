@@ -34,14 +34,15 @@ variable "service_healthcheck" {
 }
 
 variable "service_launch_type" {
-  type = list(object({
-    capacity_provider = string
-    weight            = number
-  }))
+
+  # type = list(object({
+  #   capacity_provider = string
+  #   weight            = number
+  # }))
 }
 
 
-variable "container_image" {}
+# variable "container_image" {}
 
 variable "service_hosts" {
   type        = list(string)
@@ -111,7 +112,7 @@ variable "scale_out_statistic" {}
 
 variable "scale_out_period" {}
 
-variable "scale_out_evaluation_periods" {}
+# variable "scale_out_evaluation_periods" {}
 
 variable "scale_out_cooldown" {}
 
@@ -127,7 +128,7 @@ variable "scale_in_statistic" {}
 
 variable "scale_in_period" {}
 
-variable "scale_in_evaluation_periods" {}
+# variable "scale_in_evaluation_periods" {}
 
 variable "scale_in_cooldown" {}
 

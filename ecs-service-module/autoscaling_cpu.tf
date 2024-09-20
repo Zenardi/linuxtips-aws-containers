@@ -1,5 +1,5 @@
 resource "aws_appautoscaling_policy" "cpu_high" {
-  count              = var.scale_type == "type" ? 1 : 0
+  count              = var.scale_type == "cpu" ? 1 : 0
   resource_id        = aws_appautoscaling_target.main.resource_id
   service_namespace  = aws_appautoscaling_target.main.service_namespace
   scalable_dimension = aws_appautoscaling_target.main.scalable_dimension
@@ -35,12 +35,11 @@ resource "aws_cloudwatch_metric_alarm" "cpu_high" {
   alarm_actions = [
     aws_appautoscaling_policy.cpu_high[count.index].arn
   ]
-  tags = var.tags
 }
 
 
 resource "aws_appautoscaling_policy" "cpu_low" {
-  count              = var.scale_type == "type" ? 1 : 0
+  count              = var.scale_type == "cpu" ? 1 : 0
   resource_id        = aws_appautoscaling_target.main.resource_id
   service_namespace  = aws_appautoscaling_target.main.service_namespace
   scalable_dimension = aws_appautoscaling_target.main.scalable_dimension
@@ -85,5 +84,4 @@ resource "aws_cloudwatch_metric_alarm" "cpu_low" {
   alarm_actions = [
     aws_appautoscaling_policy.cpu_low[count.index].arn
   ]
-  tags = var.tags
 }

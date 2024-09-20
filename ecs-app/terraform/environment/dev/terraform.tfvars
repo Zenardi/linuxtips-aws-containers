@@ -1,6 +1,6 @@
 region               = "us-west-2"
 service_name         = "chip"
-cluster_name         = "linux-tips-ecs-cluster"
+cluster_name         = "linuxtips-ecs-cluster"
 service_port         = "8080"
 service_cpu          = "256"
 service_memory       = "512"
