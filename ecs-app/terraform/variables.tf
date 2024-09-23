@@ -34,11 +34,10 @@ variable "service_healthcheck" {
 }
 
 variable "service_launch_type" {
-
-  # type = list(object({
-  #   capacity_provider = string
-  #   weight            = number
-  # }))
+  type = list(object({
+    capacity_provider = string
+    weight            = number
+  }))
 }
 
 
