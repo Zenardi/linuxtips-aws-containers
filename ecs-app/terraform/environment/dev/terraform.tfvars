@@ -1,5 +1,5 @@
 region               = "us-west-2"
-service_name         = "chip"
+service_name         = "linuxtips-app"
 cluster_name         = "linuxtips-ecs-cluster"
 service_port         = "8080"
 service_cpu          = "256"
@@ -48,7 +48,7 @@ service_launch_type = [
 ]
 
 service_hosts = [
-  "chip.linuxtips.demo"
+  "app.linuxtips.demo"
 ]
 
 scale_type = "cpu" # or 'cpu_tracking', 'request_tracking'

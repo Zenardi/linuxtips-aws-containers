@@ -41,7 +41,7 @@ variable "service_launch_type" {
 }
 
 
-# variable "container_image" {}
+variable "container_image" {}
 
 variable "service_hosts" {
   type        = list(string)

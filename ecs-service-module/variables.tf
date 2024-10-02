@@ -8,10 +8,10 @@ variable "service_name" {
   description = "Nome do serviço a ser utilizado no ECS ou identificador similar."
 }
 
-# variable "container_image" {
-#   type        = string
-#   description = "Imagem com tag para deployment da aplicação no ECS"
-# }
+variable "container_image" {
+  type        = string
+  description = "Imagem com tag para deployment da aplicação no ECS"
+}
 
 variable "cluster_name" {
   type        = string

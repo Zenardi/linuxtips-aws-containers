@@ -45,7 +45,7 @@ module "service" {
   scale_tracking_cpu           = var.scale_tracking_cpu
   scale_tracking_requests      = var.scale_tracking_requests
   alb_arn                      = data.aws_ssm_parameter.alb.value
-
-  tags = local.default_tags
+  container_image              = var.container_image
+  tags                         = local.default_tags
 
 }
