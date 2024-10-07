@@ -48,4 +48,14 @@ module "service" {
   container_image              = var.container_image
   tags                         = local.default_tags
 
+  efs_volumes = [
+    {
+      volume_name      = "volume-de-exemplo"
+      file_system_id   = aws_efs_file_system.main.id
+      file_system_root = "/"
+      mount_point      = "/mnt/efs"
+      read_only        = false
+    }
+  ]
+
 }
