@@ -47,7 +47,16 @@ module "service" {
   alb_arn                      = data.aws_ssm_parameter.alb.value
   container_image              = var.container_image
   tags                         = local.default_tags
-
+  secrets = [
+    {
+      name      = "VARIAVEL_COM_VALOR_DO_SSM"
+      valueFrom = aws_ssm_parameter.teste.arn
+    },
+    {
+      name      = "VARIAVEL_COM_VALOR_DO_SECRETS"
+      valueFrom = aws_secretsmanager_secret.teste.arn
+    }
+  ]
   efs_volumes = [
     {
       volume_name      = "volume-de-exemplo"
