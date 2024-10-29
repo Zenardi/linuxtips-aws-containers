@@ -33,6 +33,37 @@ variable "service_port" {
   description = "Porta na qual o serviço estará acessível."
 }
 
+variable "use_lb" {
+  type        = bool
+  default     = true
+  description = "Habilita a exposicao do service via LB"
+}
+
+variable "service_protocol" {
+  type    = string
+  default = null
+}
+
+variable "protocol" {
+  type    = string
+  default = "tcp"
+}
+
+variable "use_service_connect" {
+  type    = bool
+  default = false
+}
+
+variable "service_connect_name" {
+  type    = string
+  default = null
+}
+
+variable "service_connect_arn" {
+  type    = string
+  default = null
+}
+
 variable "service_cpu" {
   type        = number
   description = "Quantidade de CPU alocada para o serviço, especificada em unidades de CPU do ECS."
@@ -45,6 +76,7 @@ variable "service_memory" {
 
 variable "service_listener" {
   type        = string
+  default     = null
   description = "ARN do listener do Application Load Balancer que será usado pelo serviço."
 }
 
@@ -169,9 +201,9 @@ variable "scale_out_cooldown" {
   default     = 60
 }
 
-variable "scale_out_evalutation_periods" {
+# variable "scale_out_evalutation_periods" {
 
-}
+# }
 
 variable "scale_in_cpu_threshold" {
   type        = number
@@ -215,9 +247,9 @@ variable "scale_in_cooldown" {
   default     = 120
 }
 
-variable "scale_in_evalutation_periods" {
+# variable "scale_in_evalutation_periods" {
 
-}
+# }
 
 variable "scale_tracking_cpu" {
   type        = number

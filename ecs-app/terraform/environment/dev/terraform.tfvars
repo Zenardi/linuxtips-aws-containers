@@ -1,15 +1,20 @@
-region               = "us-west-2"
-service_name         = "linuxtips-app"
-cluster_name         = "linuxtips-ecs-cluster"
-service_port         = "8080"
-service_cpu          = "256"
-service_memory       = "512"
-ssm_vpc_id           = "/linuxtips-vpc/vpc/vpc_id"
-ssm_listener         = "/linuxtips/ecs/lb/listener"
+region         = "us-west-2"
+service_name   = "linuxtips-app"
+cluster_name   = "linuxtips-ecs-cluster"
+service_port   = "8080"
+service_cpu    = "256"
+service_memory = "512"
+ssm_vpc_id     = "/linuxtips-vpc/vpc/vpc_id"
+# ssm_listener         = "/linuxtips/ecs/lb/listener"
+# ssm_alb              = "/linuxtips/ecs/lb/id"
+ssm_listener = "/linuxtips/ecs/lb/internal/listener"
+ssm_alb      = "/linuxtips/ecs/lb/internal/id"
+
 ssm_private_subnet_1 = "/linuxtips-vpc/vpc/subnet_private_1a"
 ssm_private_subnet_2 = "/linuxtips-vpc/vpc/subnet_private_1b"
 ssm_private_subnet_3 = "/linuxtips-vpc/vpc/subnet_private_1c"
-ssm_alb              = "/linuxtips/ecs/lb/id"
+
+
 environment_variables = [
   {
     name  = "FOO"
@@ -48,7 +53,8 @@ service_launch_type = [
 ]
 
 service_hosts = [
-  "app.linuxtips.demo"
+  #"app.linuxtips.demo"
+  "app.linuxtips-ecs-cluster.internal.com"
 ]
 
 scale_type = "cpu" # or 'cpu_tracking', 'request_tracking'
@@ -75,3 +81,5 @@ scale_in_evalutation_periods = "2"
 scale_in_cooldown            = "60"
 scale_tracking_cpu           = "50"
 scale_tracking_requests      = "30"
+
+ssm_service_discovery_namespace = "/linuxtips/ecs/cloudmap/namespace"

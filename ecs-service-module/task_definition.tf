@@ -30,17 +30,19 @@ resource "aws_ecs_task_definition" "main" {
     {
       name   = var.service_name
       image  = var.container_image
-      cpu    = tonumber(var.service_cpu)
-      memory = tonumber(var.service_memory)
+      cpu    = var.service_cpu
+      memory = var.service_memory
 
       essential = true
 
       portMappings = [
         {
-          containerPort = tonumber(var.service_port)
-          hostPort      = tonumber(var.service_port)
-          protocol      = "tcp"
-        },
+          name          = var.service_name
+          containerPort = var.service_port
+          hostPort      = var.service_port
+          protocol      = var.protocol
+          appProtocol   = var.service_protocol
+        }
       ]
 
       logConfiguration = {
@@ -61,7 +63,8 @@ resource "aws_ecs_task_definition" "main" {
       ]
 
       environment = var.environment_variables
-      secrets     = var.secrets
+
+      secrets = var.secrets
     }
   ])
 

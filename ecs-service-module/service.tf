@@ -1,9 +1,19 @@
 resource "aws_ecs_service" "main" {
-  name            = var.service_name
-  cluster         = var.cluster_name
+  name    = var.service_name
+  cluster = var.cluster_name
+
   task_definition = aws_ecs_task_definition.main.arn
-  desired_count   = var.service_task_count
-  # launch_type                        = var.service_launch_type
+
+  desired_count = var.service_task_count
+
+  dynamic "service_registries" {
+    for_each = var.service_discovery_namespace != null ? [var.service_name] : []
+    content {
+      registry_arn   = aws_service_discovery_service.main[0].arn
+      container_name = service_registries.value
+    }
+  }
+
   deployment_maximum_percent         = 200
   deployment_minimum_healthy_percent = 100
 
@@ -21,26 +31,24 @@ resource "aws_ecs_service" "main" {
     }
   }
 
-  network_configuration {
-    security_groups = [
-      aws_security_group.main.id
-    ]
+  dynamic "service_connect_configuration" {
+    for_each = var.use_service_connect ? [var.service_connect_name] : []
 
-    subnets          = var.private_subnets
-    assign_public_ip = false
-  }
+    content {
+      enabled   = var.use_service_connect
+      namespace = var.service_connect_name
 
-  load_balancer {
-    target_group_arn = aws_alb_target_group.main.arn
-    container_name   = var.service_name
-    container_port   = var.service_port
-  }
+      service {
+        port_name      = var.service_name
+        discovery_name = var.service_name
 
-  lifecycle {
-    ignore_changes = [
-      desired_count,
-      tags
-    ]
+        client_alias {
+          port     = var.service_port
+          dns_name = format("%s.%s", var.service_name, var.service_connect_name)
+        }
+      }
+
+    }
   }
 
   dynamic "ordered_placement_strategy" {
@@ -50,6 +58,31 @@ resource "aws_ecs_service" "main" {
       field = "attribute:ecs.availability-zone"
     }
   }
+
+  network_configuration {
+    security_groups = [
+      aws_security_group.main.id
+    ]
+
+    subnets          = var.private_subnets
+    assign_public_ip = false
+  }
+
+  dynamic "load_balancer" {
+    for_each = var.use_lb ? [1] : []
+    content {
+      target_group_arn = aws_alb_target_group.main[0].arn
+      container_name   = var.service_name
+      container_port   = var.service_port
+    }
+  }
+
+  lifecycle {
+    ignore_changes = [
+      desired_count
+    ]
+  }
+
   #   platform_version = "LATEST"
 
   depends_on = []
