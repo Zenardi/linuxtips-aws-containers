@@ -21,8 +21,8 @@ module "health_api" {
 
   container_image = "fidelissauro/health-api:latest"
 
-  service_listener = data.aws_ssm_parameter.listener.value
-  alb_arn          = data.aws_ssm_parameter.alb.value
+  service_listener = data.aws_ssm_parameter.listener_internal.value
+  alb_arn          = data.aws_ssm_parameter.alb_internal.value
 
   service_task_execution_role = aws_iam_role.main.arn
 
@@ -44,7 +44,8 @@ module "health_api" {
   ]
 
   service_hosts = [
-    "health.linuxtips.demo"
+    # "health.linuxtips.demo"
+    "health.linuxtips-ecs-cluster.internal.com"
   ]
 
   // Service Connect
